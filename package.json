@@ -1,0 +1,23 @@
+{
+  "name": "oas-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/tson-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "oas2tson": "npx openapi-transformer-toolkit oas2tson -i openapi-tson.yaml -o tson",
+    "build": "npx tsc tson-server.ts --outDir ./dist",
+    "start": "node ./dist/tson-server.js | npx pino-pretty",
+    "everything": "npm run oas2tson && npm run build && npm run start"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^4.25.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "pino-pretty": "^10.3.1",
+    "typescript": "^5.3.3"
+  }
+}

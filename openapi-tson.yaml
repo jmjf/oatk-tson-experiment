@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: Test API
+  description: Testing complex query parameters
+  version: 0.0.1
+  license: 
+    name: MIT
+    url: https://nobody.org
+
+servers:
+  - url: http://127.0.0.0:3000
+
+paths:
+  /user/{userId}:
+    get:
+      operationId: getUserById
+      security: []
+      summary: GET user endpoint for tson issue
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '4xx':
+            description: error
+  /post/{postId}:
+    get:
+      operationId: getPostById
+      security: []
+      summary: GET post endpoint for tson issue
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '4xx':
+            description: error
+  /comment/{commentId}:
+    get:
+      operationId: getCommentById
+      security: []
+      summary: GET comment endpoint for tson issue
+      parameters:
+        - in: path
+          name: commentId
+          schema:
+            type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '4xx':
+            description: error
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        userId:
+          type: string
+        userNm:
+          type: string
+        emailAddr:
+          type: string
+      required:
+        - userId
+        - userNm
+    Post:
+      title: Post
+      type: object
+      properties:
+        postId:
+          type: string
+        titleTx:
+          type: string
+        postTx:
+          type: string
+        author:
+          $ref: '#/components/schemas/User'
+        comments:
+          type: 'array'
+          items:
+            $ref: '#/components/schemas/Comment'
+      required:
+        - postId
+        - titleTx
+    Comment:
+      title: Comment
+      type: object
+      properties:
+        commentId:
+          type: string
+        commentTx:
+          type: string
+        commenter:
+          $ref: '#/components/schemas/User'
+      required:
+        - commentId
+        - commentTx
+        - commenter
